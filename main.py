@@ -1,21 +1,24 @@
+import os
 import asyncio
 import logging
+
 from aiogram import Bot, Dispatcher, types
 from aiogram.filters.command import Command
 from aiogram import F
-import os
-os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
+
 from dotenv import load_dotenv
 
 from util_butterfly import get_predict
 from data import data
 
+
+# Подгружаем переменные окружения
 load_dotenv()
 
-# Включаем логирование, чтобы не пропустить важные сообщения
+# Включаем логирование
 logging.basicConfig(level=logging.INFO)
 
-# Объект бота
+
 bot = Bot(token=os.environ.get("TOKEN"))
 
 dp = Dispatcher()
@@ -26,6 +29,7 @@ async def cmd_start(message: types.Message):
     await message.answer("Hello!")
 
 
+# Хэндлер, срабатывающий на входящие фотографии
 @dp.message(F.photo)
 async def send_to_admin(message: types.Message, bot: Bot):
     file = await bot.download(message.photo[-1])
@@ -34,9 +38,8 @@ async def send_to_admin(message: types.Message, bot: Bot):
 
 
 async def main() -> None:
-    """ Entry point """
+    """ Точка входа. """
     try:
-
         async with asyncio.TaskGroup() as tg:
             tg.create_task(dp.start_polling(bot, skip_updates=True))
     except* TypeError as te:
@@ -45,6 +48,7 @@ async def main() -> None:
     except* Exception as ex:
         print(ex.exceptions)
 
+
 if __name__ == '__main__':
     try:
         loop = asyncio.new_event_loop()
@@ -52,4 +56,4 @@ if __name__ == '__main__':
         loop.run_until_complete(main())
 
     except KeyboardInterrupt:
-        print('Цикл был прерван пользователем')
+        print('Bot stopped')
