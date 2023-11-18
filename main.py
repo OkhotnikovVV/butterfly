@@ -1,0 +1,55 @@
+import asyncio
+import logging
+from aiogram import Bot, Dispatcher, types
+from aiogram.filters.command import Command
+from aiogram import F
+import os
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
+from dotenv import load_dotenv
+
+from util_butterfly import get_predict
+from data import data
+
+load_dotenv()
+
+# Включаем логирование, чтобы не пропустить важные сообщения
+logging.basicConfig(level=logging.INFO)
+
+# Объект бота
+bot = Bot(token=os.environ.get("TOKEN"))
+
+dp = Dispatcher()
+
+
+@dp.message(Command("start"))
+async def cmd_start(message: types.Message):
+    await message.answer("Hello!")
+
+
+@dp.message(F.photo)
+async def send_to_admin(message: types.Message, bot: Bot):
+    file = await bot.download(message.photo[-1])
+    ans = await get_predict(file)
+    await message.reply(f"{data[ans[0]][1]}")
+
+
+async def main() -> None:
+    """ Entry point """
+    try:
+
+        async with asyncio.TaskGroup() as tg:
+            tg.create_task(dp.start_polling(bot, skip_updates=True))
+    except* TypeError as te:
+        for errors in te.exceptions:
+            print(errors)
+    except* Exception as ex:
+        print(ex.exceptions)
+
+if __name__ == '__main__':
+    try:
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
+        loop.run_until_complete(main())
+
+    except KeyboardInterrupt:
+        print('Цикл был прерван пользователем')
