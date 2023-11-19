@@ -2,6 +2,8 @@ import os
 import numpy as np
 import tensorflow as tf
 from PIL import Image
+from typing import BinaryIO
+from numpy.typing import NDArray
 
 
 # Отключаем вывод отладочной информации Tensorflow
@@ -11,8 +13,8 @@ os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 model = tf.keras.models.load_model('model')
 
 
-async def get_predict(photo):
-    """ Делаем предсказание. На вход модели подаётся вектор размера [None, 224, 224, 3] """
+async def get_predict(photo: BinaryIO) -> NDArray:
+    """ Делаем предсказание. На вход модели подаётся вектор размера [None, 224, 224, 3]. """
     img_size = (224, 224)
 
     # Подготовим данные для предсказания
@@ -23,4 +25,3 @@ async def get_predict(photo):
     predictions = model.predict(np_image_tensor, verbose=0).argmax(axis=1)
 
     return predictions
-

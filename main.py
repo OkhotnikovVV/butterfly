@@ -25,13 +25,13 @@ dp = Dispatcher()
 
 
 @dp.message(Command("start"))
-async def cmd_start(message: types.Message):
-    await message.answer("Hello!")
+async def cmd_start(message: types.Message) -> None:
+    await message.answer("Здравствуйте! Отправьте мне фото бабочки")
 
 
 # Хэндлер, срабатывающий на входящие фотографии
 @dp.message(F.photo)
-async def send_to_admin(message: types.Message, bot: Bot):
+async def send_to_admin(message: types.Message, bot: Bot) -> None:
     file = await bot.download(message.photo[-1])
     ans = await get_predict(file)
     await message.reply(f"{data[ans[0]][1]}")
