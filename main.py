@@ -33,8 +33,8 @@ async def cmd_start(message: types.Message) -> None:
 @dp.message(F.photo)
 async def send_to_admin(message: types.Message, bot: Bot) -> None:
     file = await bot.download(message.photo[-1])
-    ans = await get_predict(file)
-    await message.reply(f"{data[ans[0]][1]}")
+    species, probability = await get_predict(file)
+    await message.reply(f"Вероятность совпадения: {int(probability * 100)} %\n{data[species][1]}")
 
 
 async def main() -> None:
