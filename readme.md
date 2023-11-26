@@ -7,5 +7,5 @@
 <p>Ссылки на описание бабочек - <a href="https://github.com/OkhotnikovVV/butterfly/blob/master/data.py" target="_blank">data</a></p>
 
 > Адрес бота в Telegram - @classify_bfly_bot
-<p></p>
+<p><br></p>
 [![codewars](https://www.codewars.com/users/OkhotnikovVV/badges/large)](https://www.codewars.com/users/OkhotnikovVV) 
