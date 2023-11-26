@@ -8,5 +8,3 @@
 <p>Ссылки на описание бабочек - <a href="https://github.com/OkhotnikovVV/butterfly/blob/master/data.py" target="_blank">data</a></p>
 
 > Адрес бота в Telegram - @classify_bfly_bot
-> 
-[![OkhotnikovVV's LeetCode stats](https://leetcode-stats-six.vercel.app/api?username=8_00)](https://github.com/8_00/leetcode-stats)
