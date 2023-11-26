@@ -1,4 +1,3 @@
-<h5 align="center"> https://www.codewars.com/users/OkhotnikovVV/badges/micro</h5>
 <h1 align="center">Классификация бабочек</h1>
 <p align="center">
   <img src="https://github.com/OkhotnikovVV/butterfly/blob/master/public/Example.png?raw=true" alt="Результаты обученной модели"/>
@@ -8,3 +7,4 @@
 <p>Ссылки на описание бабочек - <a href="https://github.com/OkhotnikovVV/butterfly/blob/master/data.py" target="_blank">data</a></p>
 
 > Адрес бота в Telegram - @classify_bfly_bot
+[![codewars](https://www.codewars.com/users/OkhotnikovVV/badges/micro)](https://www.codewars.com/users/username) 
